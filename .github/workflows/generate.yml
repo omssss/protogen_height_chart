@@ -1,0 +1,48 @@
+name: Generate and Deploy Plotly Chart
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'data.csv' # Only triggers when a CSV file changes
+
+permissions:
+  contents: write # Allows updating files in the repository
+  pages: write    # Allows deploying to GitHub Pages
+  id-token: write # Required for secure GitHub Pages deployment
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip' # Speeds up future runs
+
+      - name: Install Dependencies
+        run: |
+          pip install pandas plotly numpy
+
+      - name: Run Plotly Script
+        run: |
+          python generate_chart.py
+
+      - name: Commit HTML Output
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs: auto-generate plotly chart HTML [skip ci]"
+          file_pattern: 'index.html' # Saves the HTML file back to the repository
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.' # Uploads the root directory (containing index.html)
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
