@@ -25,7 +25,7 @@ def makeHoverText(v):
 def getColor(v):
     if v < 90:
         return "blue"
-    elif v < 180:
+    elif v <= 180:
         return "lime"
     else:
         return "red"
@@ -68,7 +68,7 @@ fig.add_trace(go.Bar(
     hovertemplate="%{hovertext}<extra></extra>"
 ), row=2, col=1)
 
-ndata = data[(data['height'] >= 90) & (data['height'] < 180)]
+ndata = data[(data['height'] >= 90) & (data['height'] <= 180)]
 ncolor = [getColor(i) for i in ndata["height"]]
 ntexts = [makeText(i) for i in ndata["height"]]
 nhovertexts = ndata.apply(makeHoverText, axis=1)
@@ -83,7 +83,7 @@ fig.add_trace(go.Bar(
     hovertemplate="%{hovertext}<extra></extra>"
 ), row=1, col=2)
 
-ndata = data[(data['height'] >= 180)]
+ndata = data[(data['height'] > 180)]
 ncolor = [getColor(i) for i in ndata["height"]]
 ntexts = [makeText(i) for i in ndata["height"]]
 nhovertexts = ndata.apply(makeHoverText, axis=1)
