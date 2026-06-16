@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'data.csv' # Only triggers when a CSV file changes
+  workflow_dispatch:
 
 permissions:
   contents: write # Allows updating files in the repository
