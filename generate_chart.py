@@ -18,8 +18,8 @@ def makeText(v):
 def makeHoverText(v):
     return (
         f"<b>{v['name']}</b><br>"
-        f"{makeText(v["height"])}<br>"
-        f"By: {v["creator_name"]}"
+        f"{makeText(v['height'])}<br>"
+        f"By: {v['creator_name']}"
     )
 
 def getColor(v):
