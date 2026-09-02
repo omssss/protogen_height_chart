@@ -1,5 +1,5 @@
 # Protogen Height Chart
-Small idea that was burn in ZOR community
+Small idea that was born in ZOR community
 
 Chart: https://omssss.github.io/protogen_height_chart/
 
